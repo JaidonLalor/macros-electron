@@ -1,0 +1,13 @@
+['1.5tb', 'hemp hearts', 70, 5, 1, 7],
+['2tb', 'pb', 180, 8, 5, 16],
+['4/3 cup', 'oats', 225, 7.5, 40.5, 4.5],
+['handfull', 'blueberries', 0, 0, 0, 0],
+['1/8 cup (dry)', 'brown rice', 75, 2, 15, 0.75],
+['1/2 cup', 'vital wheat gluten (seitan)', 240, 46, 8, 2],
+['lotta', 'greenbeans', 0, 0, 0, 0],
+['1 cup (dry)', 'red lentils', 480, 32, 88, 0],
+['2 servings', 'tortilla chips', 300, 2, 32, 20],
+['1tb', 'olive oil', 130, 0, 0, 14],
+['1 serving', 'pb protein', 190, 20, 17, 5],
+['handful', 'blueberries', 0, 0, 0, 0],
+['1.5tb' 'hemp hearts', 70, 5, 1, 7]
