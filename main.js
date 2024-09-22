@@ -5,12 +5,18 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-    },
+    frame: false,
   });
 
-  win.loadFile('./dist/index.html');
+  const isDev = process.env.ELECTRON_IS_DEV === 'true'; //Conditionally run dev vs production mode. Set in package.json
+
+  if (isDev) {
+    console.log('Loading from localhost:3000 (Development)');
+    win.loadURL('http://localhost:3000');
+  } else {
+    console.log('Loading from dist/index.html (Production)');
+    win.loadFile(path.join(__dirname, 'dist/index.html'));
+  }
 }
 
 app.whenReady().then(() => {

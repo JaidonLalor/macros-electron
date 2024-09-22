@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import Layout from './components/Layout';
 
-const App = () => {
-  return <div className="text-center p-4">Hello Electron with React, TypeScript, and Tailwind!</div>;
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = document.getElementById('root');
+if (root) {
+  (ReactDOM as any).createRoot(root).render(
+    <React.StrictMode>
+      <Layout />
+    </React.StrictMode>
+  );
+} else {
+  console.error('Root element not found');
+}
