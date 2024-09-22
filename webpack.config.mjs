@@ -1,7 +1,12 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
 
-module.exports = (env, argv) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default (env, argv) => {
   const isDevelopment = argv.mode === 'development';
 
   return {
@@ -13,6 +18,20 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      },
+      fallback: {
+        "util": false,
+        "assert": false,
+        "crypto": false,
+        "stream": false,
+        "timers": false,
+        "tty": false,
+        "fs": false,
+        "path": false,
+        "url": false
+      },
     },
     module: {
       rules: [
@@ -31,6 +50,9 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: './src/index.html',
       }),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
     ],
     devServer: {
       static: false,
@@ -38,7 +60,7 @@ module.exports = (env, argv) => {
       port: 3000,
     },
     performance: {
-        hints: false,  // Disable performance hints in development mode bc was getting annoying big bundle warnings
+      hints: false,
     },
   };
 };

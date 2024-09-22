@@ -36,10 +36,10 @@ const DataEntry = () => {
         setRecord({ ...record, foods: updatedFoods });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Submitting record:", record);
-    }
+        console.log("Submitting record...", record);   
+    };
 
     const inputClass = '';
     const numberInputClass = `${inputClass} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`;
