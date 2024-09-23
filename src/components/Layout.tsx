@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./Header";
 import DataNav from "./DataNav";
-import DataEntry from "./DataEntry";
+import DataView from "./DataView";
 
 const Layout = () => {
     return (
@@ -10,7 +10,7 @@ const Layout = () => {
             <Header/>
             <div className="flex flex-grow">
                 <DataNav/>
-                <DataEntry/>
+                <DataView/>
             </div>
         </div>
     );

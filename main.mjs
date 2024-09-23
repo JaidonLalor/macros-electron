@@ -13,8 +13,9 @@ function createWindow() {
     height: 600,
     frame: false,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.cjs'),
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
     }
   });
 
@@ -91,4 +92,14 @@ ipcMain.handle('db:delete', async (event, table, where) => {
     console.error('Database delete error:', error);
     throw error;
   }
+});
+
+app.on('ready', () => {
+  globalShortcut.register('CommandOrControl+Q', () => {
+    app.quit();
+  });
+});
+
+ipcMain.on('quit-app', () => {
+  app.quit();
 });

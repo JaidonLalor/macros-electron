@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "lib": ["dom", "dom.iterable", "es2015"],
+    "types": ["node", "./src/electron.d.ts"],
     "jsx": "react",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -15,5 +16,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

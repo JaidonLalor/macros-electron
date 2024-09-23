@@ -62,5 +62,8 @@ export default (env, argv) => {
     performance: {
       hints: false,
     },
+    externals: {
+      electron: 'commonjs electron'
+    },
   };
 };
