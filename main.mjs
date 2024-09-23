@@ -1,5 +1,5 @@
 // main.mjs
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import db from './src/database/index.js';
