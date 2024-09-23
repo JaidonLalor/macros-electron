@@ -6,11 +6,11 @@ const FileList: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex justify-between align-top">
-        <h2 className="font-semibold mb-2">Records</h2>
+      <div className="flex justify-between align-middle">
+        <h2 className="font-semibold">Records</h2>
         <button
           onClick={() => writeNewRecord()}
-          className="text-lg bg-gray-200"
+          className="text-lg bg-gray-200 px-2"
         >+</button>
       </div>
       <div className="flex-1 h-[150%] overflow-y-auto">

@@ -13,7 +13,7 @@ const DataNav = () => {
             {isOpen ? (
                 <div className="w-[20%] min-w-36">
                     <button
-                        className="p-1 bg-slate-400"
+                        className="p-1 bg-slate-200 px-2 py-1"
                         onClick={() => toggleView()}
                         >&lt;</button>
                     <FileList/>
@@ -21,7 +21,7 @@ const DataNav = () => {
             ) : (
                 <div>
                     <button
-                        className="p-1 bg-slate-400"
+                        className="p-1 bg-slate-200 px-2 py-1"
                         onClick={() => toggleView()}
                     >&gt;</button>
                 </div>

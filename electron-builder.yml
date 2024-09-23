@@ -1,0 +1,15 @@
+appId: com.blueprint.macros
+productName: MacrosV1
+directories:
+  output: release-builds
+files:
+  - dist/**/*
+  - main.mjs
+  - preload.cjs
+  - src/**/*
+extraResources:
+  - from: "src/database"
+    to: "database"
+mac:
+  category: public.app-category.utilities
+  icon: assets/icon.icns

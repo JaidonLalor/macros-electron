@@ -9,7 +9,28 @@
     "electron": "ELECTRON_IS_DEV=false electron .",
     "electron-dev": "ELECTRON_IS_DEV=true concurrently \"npm:serve\" \"npm:electron-watch\"",
     "serve": "webpack serve --config webpack.config.mjs",
-    "electron-watch": "wait-on http://localhost:3000 && electron ."
+    "electron-watch": "wait-on http://localhost:3000 && electron .",
+    "package-mac": "npm run build && electron-builder build --mac",
+    "create-dmg": "electron-installer-dmg ./release-builds/macros-darwin-x64/macros.app macros --out=release-builds --overwrite --icon=assets/icon.icns"
+  },
+  "build": {
+    "appId": "com.blueprint.macros",
+    "productName": "MacrosV1",
+    "files": [
+      "dist/**/*",
+      "main.mjs",
+      "preload.cjs"
+    ],
+    "extraResources": [
+      {
+        "from": "src/database",
+        "to": "database"
+      }
+    ],
+    "mac": {
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.utilities"
+    }
   },
   "keywords": [],
   "author": "",
@@ -26,6 +47,10 @@
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.0.0",
     "electron": "^32.1.2",
+    "electron-builder": "^25.0.5",
+    "electron-installer-dmg": "^5.0.1",
+    "electron-packager": "^17.1.2",
+    "electron-rebuild": "^3.2.9",
     "eslint-import-resolver-alias": "^1.1.2",
     "html-webpack-plugin": "^5.6.0",
     "path-browserify": "^1.0.1",

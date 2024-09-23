@@ -1,11 +1,27 @@
 // main.mjs
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import db from './src/database/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+console.log('__dirname:', __dirname);
+console.log('process.resourcesPath:', process.resourcesPath);
+console.log('app.getAppPath():', app.getAppPath());
+
+// Use this function to get the correct path in both dev and prod
+function getAssetPath(asset) {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, asset);
+  }
+  return path.join(__dirname, asset);
+}
+
+// Use the getAssetPath function when importing your database
+const dbPath = getAssetPath('database/index.mjs');
+console.log('Attempting to import database from:', dbPath);
+const db = await import(dbPath);
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -98,6 +114,10 @@ app.on('ready', () => {
   globalShortcut.register('CommandOrControl+Q', () => {
     app.quit();
   });
+});
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
 });
 
 ipcMain.on('quit-app', () => {
