@@ -1,9 +1,0 @@
-['1/2 cup', 'oats', 150, 5, 27, 2.5],
-['5', 'mini tortillas', 375, 10, 65, 6],
-['1', 'kroger dawg', 230, 27, 7, 10],
-['1/4 cup', 'peanuts', 160, 7, 6, 14],
-['1 serving', 'corn tortilla chips', 150, 2, 20, 7],
-['2 tb', 'hommus', 90, 2, 5, 7],
-['1.5', 'kroger vegan dawgs', 345, 40.5, 10.5, 15],
-['3', 'mini tortillas', 225, 6, 39, 3],
-['4', 'mini icecream sandwiches', 400, 4, 56, 16]

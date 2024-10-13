@@ -1,8 +1,0 @@
-['1/2', 'block tofu', 180, 18, 5, 9],
-['1/2', 'bag spinach', 60, 4, 6, 0],
-['2.5', 'kroger vegan dawgs', 575, 67.5, 17.5, 25],
-['1.5tb', 'vege oil', 180, 0, 0, 21],
-['2', 'mini tortillas', 150, 4, 26, 3.5],
-['4.5', 'granola bars', 630, 9, 60, 20],
-['1 bottle', 'spiced chai protein drink', 320, 15, 36, 12],
-['1 cup', 'soymilk', 70, 7, 3, 3.5]
