@@ -1,4 +1,4 @@
-// preload.js
+// preload.cjs
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -6,5 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     query: (sql, params) => ipcRenderer.invoke('db:query', sql, params),
     updateRecord: (table, data, where) => ipcRenderer.invoke('db:update', table, data, where),
     deleteRecord: (table, where) => ipcRenderer.invoke('db:delete', table, where),
-    quit: () => ipcRenderer.invoke('quit-app'),
+    quit: () => ipcRenderer.send('quit-app'),
+    fetchPresets: () => ipcRenderer.invoke('db:fetch-presets'),
+    savePresets: (presets) => ipcRenderer.invoke('db:save-presets', presets),
 });

@@ -1,8 +1,8 @@
-import { useViewProvider } from "@/providers/ViewProvider";
+import useRecordProvider from "@/providers/RecordProvider";
 import React, { useMemo } from "react";
 
 const SumPanel = () => {
-    const { record } = useViewProvider();
+    const { record } = useRecordProvider();
 
     const sumTableClass = "grid grid-cols-[repeat(4,minmax(0,1fr))] gap-2.5";
 

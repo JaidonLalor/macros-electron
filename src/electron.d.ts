@@ -5,6 +5,8 @@ export interface ElectronAPI {
     updateRecord: (table: string, data: any, where: any) => Promise<any>;
     deleteRecord: (table: string, where: any) => Promise<any>;
     quit: () => void;
+    fetchPresets: () => Promise<any>,
+    savePresets: (presets) => Promise<any>,
   }
   
   declare global {

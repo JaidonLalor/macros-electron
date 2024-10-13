@@ -3,6 +3,8 @@ import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import db from './src/database/index.js';
+import { registerHandlers } from './src/ipc/registerHandlers.js';
+import { unregisterKeyboardShortcuts } from './src/ipc/keyboardShortcuts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,7 +15,7 @@ function createWindow() {
     height: 600,
     frame: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.cjs'),
+      preload: path.join(__dirname, 'src', 'preload.cjs'),
       nodeIntegration: true,
       contextIsolation: true,
     }
@@ -39,6 +41,7 @@ app.whenReady().then(async () => {
   }
   
   createWindow();
+  registerHandlers();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -53,53 +56,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-// IPC Handlers
-ipcMain.handle('db:query', async (event, sql, params) => {
-  try {
-    const result = await db.raw(sql, params);
-    return result;
-  } catch (error) {
-    console.error('Database query error:', error);
-    throw error;
-  }
-});
-
-ipcMain.handle('db:insert', async (event, table, data) => {
-  try {
-    const result = await db(table).insert(data);
-    return result;
-  } catch (error) {
-    console.error('Database insert error:', error);
-    throw error;
-  }
-});
-
-ipcMain.handle('db:update', async (event, table, data, where) => {
-  try {
-    const result = await db(table).where(where).update(data);
-    return result;
-  } catch (error) {
-    console.error('Database update error:', error);
-    throw error;
-  }
-});
-
-ipcMain.handle('db:delete', async (event, table, where) => {
-  try {
-    const result = await db(table).where(where).del();
-    return result;
-  } catch (error) {
-    console.error('Database delete error:', error);
-    throw error;
-  }
-});
-
-app.on('ready', () => {
-  globalShortcut.register('CommandOrControl+Q', () => {
-    app.quit();
-  });
-});
-
-ipcMain.on('quit-app', () => {
-  app.quit();
+app.on('will-quit', () => {
+  unregisterKeyboardShortcuts();
 });

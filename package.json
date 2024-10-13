@@ -1,21 +1,36 @@
 {
   "name": "macros",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "main.mjs",
   "type": "module",
   "scripts": {
-    "start": "webpack serve --config webpack.config.mjs",
+    "start": "electron-forge start",
     "build": "webpack --mode production",
     "electron": "ELECTRON_IS_DEV=false electron .",
-    "electron-dev": "ELECTRON_IS_DEV=true concurrently \"npm:serve\" \"npm:electron-watch\"",
-    "serve": "webpack serve --config webpack.config.mjs",
-    "electron-watch": "wait-on http://localhost:3000 && electron ."
+    "electron-dev": "ELECTRON_IS_DEV=true electron-forge start",
+    "dev": "ELECTRON_IS_DEV=true NODE_ENV=development concurrently \"npm:serve\" \"npm:electron-dev\"",
+    "serve": "webpack serve --config ./config/webpack.renderer.config.cjs --mode development",
+    "electron-watch": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "config": {
+    "forge": "./config/forge.config.cjs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jaidon",
   "license": "ISC",
-  "description": "",
+  "description": "A simple macro counting app",
   "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron-forge/plugin-webpack": "^7.5.0",
+    "@electron/fuses": "^1.8.0",
     "@types/knex": "^0.15.2",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
@@ -24,7 +39,7 @@
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.0.1",
     "crypto-browserify": "^3.12.0",
-    "css-loader": "^6.0.0",
+    "css-loader": "^6.11.0",
     "electron": "^32.1.2",
     "eslint-import-resolver-alias": "^1.1.2",
     "html-webpack-plugin": "^5.6.0",
@@ -35,8 +50,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "stream-browserify": "^3.0.0",
-    "style-loader": "^3.0.0",
-    "tailwindcss": "^3.4.12",
+    "style-loader": "^3.3.4",
+    "tailwindcss": "^3.4.13",
     "timers-browserify": "^2.0.12",
     "ts-loader": "^9.5.1",
     "tty-browserify": "^0.0.1",
@@ -49,6 +64,7 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.1",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7"
   }

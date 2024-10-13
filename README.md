@@ -3,12 +3,12 @@
 Simple app to help me track my macros.
 
 ## Next iteration:
+- [x] Preset foods
 - After "add food" place focus on food name
-- Date input format yyyy/mm/dd
 
 ## Future features:
 - Last 30 days sum
-- Preset foods
+- Date input format yyyy/mm/dd
 - Multi-line chart of last 30 days
 - Fix scroll on FileList and Entry
 - Collapsable months in records viewer

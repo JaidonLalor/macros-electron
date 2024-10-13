@@ -1,9 +1,10 @@
 # Dependencies
 /node_modules
 
-# Production build
+# builds
 /build
 /dist
+.webpack/*
 
 # Misc
 .DS_Store
@@ -25,3 +26,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+out/

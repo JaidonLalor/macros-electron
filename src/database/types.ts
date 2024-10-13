@@ -40,3 +40,29 @@ export interface Record {
     note: string;
     water: string;
 }
+
+export const emptyPresetState: PresetType = {
+    id: null,
+    name: '',
+    servings: null,
+    caloriesPerServing: null,
+    gramsProteinPerServing: null,
+    gramsCarbsPerServing: null,
+    gramsFatsPerServing: null,
+    description: null,
+    created_at: '',
+    updated_at: '',
+}
+
+export interface PresetType {
+    id: number | null;
+    name: string | null;
+    servings: number | null;
+    caloriesPerServing: number | null;
+    gramsProteinPerServing: number | null;
+    gramsCarbsPerServing: number | null;
+    gramsFatsPerServing: number | null;
+    description: string | null;
+    created_at: string;
+    updated_at: string;
+}

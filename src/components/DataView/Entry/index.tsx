@@ -1,17 +1,35 @@
 import React from "react";
-import { useViewProvider } from "@/providers/ViewProvider";
+import useViewProvider from "@/providers/ViewProvider";
 import SumPanel from "./SumPanel";
+import useRecordProvider from "@/providers/RecordProvider";
+import FoodEntry from "./FoodEntry";
 
 const Entry = () => {
-    const { currentView, record, setRecord, isOldRecord, editRecord, pushToDatabase, deleteRecord } = useViewProvider();
+    const { currentView } = useViewProvider();
+    const { record, setRecord, isOldRecord, editRecord, pushToDatabase, deleteRecord } = useRecordProvider();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index?: number) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, index?: number) => {
         const { name, value } = e.target;
 
+        console.log(`Received update for ${name}: ${value}`);
+
         // Handle changes for the 'foods' array
-        if (index !== undefined) {
+        if (name === 'preset' && index !== undefined) {
+            const preset = JSON.parse(value);
+            const updatedFoods = [...record.foods];
+            updatedFoods[index] = {
+                ...updatedFoods[index],
+                name: preset.name,
+                caloriesPerServing: preset.caloriesPerServing,
+                gramsProteinPerServing: preset.gramsProteinPerServing,
+                gramsCarbsPerServing: preset.gramsCarbsPerServing,
+                gramsFatsPerServing: preset.gramsFatsPerServing
+            };
+            setRecord({ ...record, foods: updatedFoods });
+        } else if (index !== undefined) {
             const updatedFoods = [...record.foods];
             updatedFoods[index] = { ...updatedFoods[index], [name]: value };
+            console.log('Updated food:', updatedFoods);
             setRecord({ ...record, foods: updatedFoods });
         } else {
             setRecord({ ...record, [name]: value });
@@ -71,7 +89,7 @@ const Entry = () => {
                         name="date"
                         value={record.date}
                         onChange={handleInputChange}
-                        disabled={isViewOnly}
+                        disabled={isViewOnly}                        
                     />
                 </div>
 
@@ -89,72 +107,14 @@ const Entry = () => {
                     </div>
 
                     {record.foods.map((food, index) => (
-                        <div key={index} className={tableClass}>
-                            <input
-                                type="text"
-                                name="name"
-                                value={food.name}
-                                onChange={(e) => handleInputChange(e, index)}
-                                placeholder="Food Name"
-                                className={inputClass}
-                                disabled={isViewOnly}
-                            />
-                            <input
-                                type="number"
-                                name="servings"
-                                value={food.servings}
-                                onChange={(e) => handleInputChange(e, index)}
-                                placeholder="Servings"
-                                className={numberInputClass}
-                                disabled={isViewOnly}
-                            />
-                            <input
-                                type="number"
-                                name="caloriesPerServing"
-                                value={food.caloriesPerServing}
-                                onChange={(e) => handleInputChange(e, index)}
-                                placeholder="Calories per Serving"
-                                className={numberInputClass}
-                                disabled={isViewOnly}
-                            />
-                            <input
-                                type="number"
-                                name="gramsProteinPerServing"
-                                value={food.gramsProteinPerServing}
-                                onChange={(e) => handleInputChange(e, index)}
-                                placeholder="Grams Protein per Serving"
-                                className={numberInputClass}
-                                disabled={isViewOnly}
-                            />
-                            <input
-                                type="number"
-                                name="gramsCarbsPerServing"
-                                value={food.gramsCarbsPerServing}
-                                onChange={(e) => handleInputChange(e, index)}
-                                placeholder="Grams Carbs per Serving"
-                                className={numberInputClass}
-                                disabled={isViewOnly}
-                            />
-                            <input
-                                type="number"
-                                name="gramsFatsPerServing"
-                                value={food.gramsFatsPerServing}
-                                onChange={(e) => handleInputChange(e, index)}
-                                placeholder="Grams Fats per Serving"
-                                className={numberInputClass}
-                                disabled={isViewOnly}
-                            />
-                            {!isViewOnly && (
-                                <button
-                                    type="button"
-                                    onClick={() => removeFood(index)}
-                                    className="text-red-500"
-                                    disabled={isViewOnly}
-                                >
-                                    Remove
-                                </button>
-                            )}
-                        </div>
+                        <FoodEntry
+                            key={index}
+                            food={food}
+                            index={index}
+                            onChange={handleInputChange}
+                            onRemove={removeFood}
+                            isViewOnly={isViewOnly}
+                        />
                     ))}
                 </div>
 
