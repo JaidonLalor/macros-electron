@@ -3,6 +3,7 @@
 Simple app to help me track my macros.
 
 ## Next iteration:
+- Target macros (and percentage complete in daily stats)
 - [x] Preset foods
 - [x] Collapsable months in records viewer
 - [x] Last 30 days average
@@ -12,6 +13,7 @@ Simple app to help me track my macros.
 - Null/no records handling
 - Update @/database/types Record to not have food list
 - Date input format yyyy/mm/dd
+- Days left in month or week or streak couter
 - Prevent writing of record with duplicate date?
 - Grocery price tracking
 - After "add food" place focus on food name
