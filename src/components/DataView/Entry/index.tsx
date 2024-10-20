@@ -80,7 +80,7 @@ const Entry = () => {
                 )}
             </div>
 
-            <form className="w-full min-h-[200%]" onSubmit={handleSubmit}>
+            <form className="w-full" onSubmit={handleSubmit}>
 
                 <div>
                     <label>Date: </label>

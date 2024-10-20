@@ -8,7 +8,7 @@ import useViewProvider from "../ViewProvider";
 interface RecordContextType {
     record: Record;
     setRecord: (record: Record) => void;
-    recordList: Record[];
+    recordList: RecordList;
     writeNewRecord: () => void;
     selectRecord: (id: number | null) => void;
     pushToDatabase: () => Promise<void>;
@@ -19,10 +19,12 @@ interface RecordContextType {
 
 const RecordContext = createContext<RecordContextType | undefined>(undefined);
 
+export type RecordList = { id: number, date: string }[];
+
 export const RecordProvider = ({ children }: { children: ReactNode }) => {
     const { currentView, setCurrentView } = useViewProvider();
     const [record, setRecord] = useState<Record>(emptyRecordState) as [Record, React.Dispatch<React.SetStateAction<Record>>];
-    const [recordList, setRecordList] = useState<Record[]>([]);
+    const [recordList, setRecordList] = useState<RecordList>([]);
     const [isOldRecord, setIsOldRecord] = useState<boolean>(false);
     const { selectRecord: selectRecordFunction, isLoading: selectLoading, error: selectError } = useSelectRecord(setRecord);
     const { pushToDatabase: pushToDatabaseFunction } = usePushToDatabase(record, isOldRecord);
@@ -53,7 +55,6 @@ export const RecordProvider = ({ children }: { children: ReactNode }) => {
 
         try {
             await deleteRecordFunction(record.id);
-            setRecordList(prevList => prevList.filter(r => r.id !== record.id));
             setRecord(emptyRecordState);
             setIsOldRecord(false);
             setCurrentView('idle');

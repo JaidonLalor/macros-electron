@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction } from 'react';
 
-type ViewType = 'edit' | 'view' | 'idle' | 'presets';
+type ViewType = 'edit' | 'view' | 'idle' | 'presets' | 'analysis';
 
 interface ViewContextType {
   currentView: ViewType;
