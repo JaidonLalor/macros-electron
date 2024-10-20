@@ -1,5 +1,5 @@
 # macros
-![screen recording of app usage](assets/macros-v1.gif)
+![screen recording of app usage](assets/macros-v3.gif)
 Simple app to help me track my macros.
 
 ## Next iteration:
