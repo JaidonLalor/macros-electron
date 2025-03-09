@@ -1,12 +1,18 @@
 import { Record } from "@/database/types";
 import { AnalysisViewRange } from "../types";
 
-export const fetchRecordsByRange = async (range: AnalysisViewRange): Promise<Record[]> => {
+export const fetchRecordsByRange = async (
+    range: AnalysisViewRange,
+    startDate?: string,
+    endDate?: string
+): Promise<Record[]> => {
     let whereClause = '';
     if (range === 'week') {
         whereClause = 'WHERE r.date >= date("now", "-7 days")';
     } else if (range === 'month') {
         whereClause = 'WHERE r.date >= date("now", "-30 days")';
+    } else if (range === 'custom' && startDate && endDate) {
+        whereClause = `WHERE r.date >= '${startDate}' AND r.date <= '${endDate}'`;
     } else if (range === 'all') {
         whereClause = ''; // No date filtering for 'all'
     }

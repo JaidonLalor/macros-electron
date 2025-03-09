@@ -7,6 +7,10 @@ interface AnalysisContextType {
     records: NormalizedRecord[] | undefined;
     setViewRange: Dispatch<SetStateAction<AnalysisViewRange>>;
     viewRange: AnalysisViewRange;
+    startDate: string | undefined;
+    setStartDate: Dispatch<SetStateAction<string | undefined>>;
+    endDate: string | undefined;
+    setEndDate: Dispatch<SetStateAction<string | undefined>>;
     isLoading: boolean;
     error: string | null;
     stats: Stats;
@@ -17,12 +21,14 @@ const AnalysisContext = createContext<AnalysisContextType | undefined>(undefined
 export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [records, setRecords] = useState<NormalizedRecord[] | undefined>();
     const [viewRange, setViewRange] = useState<AnalysisViewRange>('month');
+    const [startDate, setStartDate] = useState<string | undefined>();
+    const [endDate, setEndDate] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const stats = useStats(records);
 
     useEffect(() => {
-        loadRecords({setRecords, setIsLoading, setError, viewRange});
+        loadRecords({setRecords, setIsLoading, setError, viewRange, startDate, endDate});
     }, [viewRange]);
 
     console.log('Records:', records);
@@ -32,6 +38,10 @@ export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }
             records,
             setViewRange,
             viewRange,
+            startDate,
+            setStartDate,
+            endDate,
+            setEndDate,
             isLoading,
             error,
             stats
